@@ -3,10 +3,10 @@ port: 8895
 metric_port: 2113
 mysql:
   base:
-    master_dsn: admin:boomstage88888888@tcp(127.0.0.1:3306)/boomstage?timeout=30s&charset=utf8mb4&interpolateParams=true
-    slave_dsn: admin:boomstage88888888@tcp(127.0.0.1:3306)/boomstage?timeout=30s&charset=utf8mb4&interpolateParams=true
+    master_dsn: admin:boomstage88888888@tcp(database-2.cdeq6yiysgml.us-east-2.rds.amazonaws.com:3306)/boomstage?timeout=30s&charset=utf8mb4&interpolateParams=true
+    slave_dsn: admin:boomstage88888888@tcp(database-2.cdeq6yiysgml.us-east-2.rds.amazonaws.com:3306)/boomstage?timeout=30s&charset=utf8mb4&interpolateParams=true
   admin:
-    dsn: admin:boomstage88888888@tcp(127.0.0.1:3306)/boomstage?timeout=30s&charset=utf8mb4&interpolateParams=true
+    dsn: admin:boomstage88888888@tcp(database-2.cdeq6yiysgml.us-east-2.rds.amazonaws.com:3306)/boomstage?timeout=30s&charset=utf8mb4&interpolateParams=true
 redis:
   addr: 127.0.0.1:6379
   password: ""
