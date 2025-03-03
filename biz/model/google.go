@@ -9,7 +9,7 @@ import (
 var GoogleOAuthConfig = &oauth2.Config{
 	ClientID:     "382560526809-pudqrlcgcpal4osob3a0a15ah62q4gee.apps.googleusercontent.com",
 	ClientSecret: "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",
-	RedirectURL:  "http://localhost:8895/admin/google/callback",
+	RedirectURL:  "http://boombition.com/app/google/callback",
 	Scopes:       []string{"email", "profile"},
 	Endpoint:     google.Endpoint,
 }
