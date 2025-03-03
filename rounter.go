@@ -7,9 +7,9 @@ import (
 
 // customizeRegister registers customize routers.
 func customizedAdminRegister(r *server.Hertz) {
-	admin := r.Group("/admin")
+	app := r.Group("/app")
 	//admin.GET("/ping", handler.Ping)
 
-	admin.GET("/google/login", handler.Google.HandleGoogleLogin)
-	admin.GET("/google/callback", handler.Google.HandleGoogleCallback)
+	app.GET("/google/login", handler.Google.HandleGoogleLogin)
+	app.GET("/google/callback", handler.Google.HandleGoogleCallback)
 }
