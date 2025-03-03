@@ -7,8 +7,8 @@ import (
 
 func InitAuth(h *server.Hertz) {
 	excluedePaths := []string{
-		"/admin/google/login",
-		"/admin/google/callback",
+		"/app/google/login",
+		"/app/google/callback",
 		"/ping",
 	}
 
