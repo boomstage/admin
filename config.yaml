@@ -19,6 +19,7 @@ jwt:
     1: "gosh_admin-secret"
 file:
   s3:
+    access_key_id: AKIAQE43KARW4PKHRSDZ
     secret_access_key: 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
     bucket: gosh-static-test
   cdn:
@@ -29,5 +30,6 @@ lark:
   app_id: cli_a6540d48def9d010
   app_secret: hJRzIpeetzdK1uhDQ3PzRbh5RIe6VSqq
 aws:
+  access_key_id: AKIAQE43KARW4PKHRSDZ
   secret_access_key: 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
   bucket: gosh-static-test
