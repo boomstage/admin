@@ -2,14 +2,11 @@ env: local
 port: 8895
 metric_port: 2113
 mysql:
-  datacenter:
-    master_dsn: root@tcp(127.0.0.1:3306)/gosh_datacenter?timeout=30s&charset=utf8mb4&interpolateParams=true
-    slave_dsn: root@tcp(127.0.0.1:3306)/gosh_datacenter?timeout=30s&charset=utf8mb4&interpolateParams=true
   base:
-    master_dsn: root@tcp(127.0.0.1:3306)/gosh?timeout=30s&charset=utf8mb4&interpolateParams=true
-    slave_dsn: root@tcp(127.0.0.1:3306)/gosh?timeout=30s&charset=utf8mb4&interpolateParams=true
+    master_dsn: admin:boomstage88888888@tcp(127.0.0.1:3306)/boomstage?timeout=30s&charset=utf8mb4&interpolateParams=true
+    slave_dsn: admin:boomstage88888888@tcp(127.0.0.1:3306)/boomstage?timeout=30s&charset=utf8mb4&interpolateParams=true
   admin:
-    dsn: root@tcp(127.0.0.1:3306)/gosh_admin?timeout=30s&charset=utf8mb4&interpolateParams=true
+    dsn: admin:boomstage88888888@tcp(127.0.0.1:3306)/boomstage?timeout=30s&charset=utf8mb4&interpolateParams=true
 redis:
   addr: 127.0.0.1:6379
   password: ""
