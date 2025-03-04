@@ -4,13 +4,15 @@ import (
 	"context"
 	"encoding/base64"
 	"encoding/json"
-	"errors"
 	"github.com/boomstage/admin/biz/model"
+	"github.com/boomstage/admin/biz/mw"
 	"github.com/boomstage/admin/biz/service"
 	"github.com/boomstage/admin/biz/util"
 	"github.com/cloudwego/hertz/pkg/app"
+	"github.com/cloudwego/hertz/pkg/protocol"
 	"github.com/duke-git/lancet/v2/convertor"
 	"math/rand"
+	"time"
 )
 
 var Google GoogleHandler
@@ -34,17 +36,8 @@ func (g *GoogleHandler) HandleGoogleLogin(ctx context.Context, c *app.RequestCon
 
 // 处理 Google 登录回调
 func (g *GoogleHandler) HandleGoogleCallback(ctx context.Context, c *app.RequestContext) {
-	// 验证 state 以防止 CSRF 攻击
-	cookie := c.Cookie("oauthstate")
-	state, _ := c.Get("state")
-	if cookie == nil || convertor.ToString(state) != string(cookie) {
-		util.Zerolog.Err(errors.New("invalid state")).Msg("invalid state")
-		util.FmtDataResp(c, nil)
-		return
-	}
-
 	// 使用授权码换取 Access Token
-	code, _ := c.Get("code")
+	code, _ := c.GetQuery("code")
 	token, err := model.GoogleOAuthConfig.Exchange(context.Background(), convertor.ToString(code))
 	if err != nil {
 		util.Zerolog.Err(err).Msg("Failed to exchange token")
@@ -74,7 +67,7 @@ func (g *GoogleHandler) HandleGoogleCallback(ctx context.Context, c *app.Request
 		util.Zerolog.Err(err).Msg("Failed to create JWT token")
 		return
 	}
-
+	c.SetCookie(mw.AuthKey, jwtToken, int(time.Hour.Seconds())*24, "/", string(c.Host()), protocol.CookieSameSiteLaxMode, true, true)
 	// 返回 JWT Token
 	c.Header("Content-Type", "application/json")
 	type Response struct {
