@@ -32,8 +32,10 @@ const (
 	PathTypeAdmin    string = "admin"
 	PathTypeInternal string = "internal"
 
-	AuthKey   = "Authorization"
-	CookieKey = "token"
+	AuthKey      = "Authorization"
+	CookieKey    = "token"
+	UserSource   = "boomstage-usource"
+	BoomStageUID = "boomstage-uid"
 )
 
 // WithExcluedPaths 设置排除的路由,不用鉴权,不支持*
@@ -79,31 +81,7 @@ func NewAuth(secrets map[model.UserSource]string, opts ...AuthOption) app.Handle
 			c.AbortWithStatus(consts.StatusNotFound)
 			return
 		}
-		pathType := paths[2]
-		userSource := model.UserSource(util.ToInt64(c.Query("us")))
-
-		switch pathType {
-		case PathTypeInternal:
-			ip := c.ClientIP()
-			if !util.IsInternalIP(ip) {
-				log.Printf("path: %s is internal path, uid: %s, ip: %s can not access", path, c.GetString("uid"), ip)
-				c.AbortWithStatus(consts.StatusForbidden)
-				return
-			}
-			// 如果是内网, 不需要鉴权, 但需要us为UserSourceSvc
-			if userSource != model.UserSourceSvc {
-				log.Printf("path: %s is internal path, uid: %s, us: %d can not access", path, c.GetString("uid"), int64(userSource))
-				c.AbortWithStatus(consts.StatusForbidden)
-				return
-			}
-			return
-		case PathTypeAdmin:
-			if userSource != model.UserSourceAdmin {
-				log.Printf("path: %s is admin path, uid: %s, us: %d can not access", path, c.GetString("uid"), int64(userSource))
-				c.AbortWithStatus(consts.StatusForbidden)
-				return
-			}
-		}
+		userSource := model.UserSource(util.ToInt64(string(c.Cookie(UserSource))))
 
 		// 鉴权
 		tokenString := string(c.GetHeader(AuthKey))
@@ -177,8 +155,8 @@ func NewAuth(secrets map[model.UserSource]string, opts ...AuthOption) app.Handle
 		}
 
 		// 附加上下文信息
-		c.Set("gosh-uid", uid)
-		c.Set("gosh-usource", userSource)
+		c.Set(BoomStageUID, uid)
+		c.Set(UserSource, userSource)
 	}
 }
 
@@ -207,6 +185,7 @@ func GenAuthTokenAndSetCookie(c *app.RequestContext, userSource model.UserSource
 		return "", err
 	}
 	c.SetCookie(AuthKey, token, int(duration.Seconds()), "/", string(c.Host()), protocol.CookieSameSiteLaxMode, true, true)
+	c.SetCookie(UserSource, string(rune(userSource)), int(duration.Seconds()), "/", string(c.Host()), protocol.CookieSameSiteLaxMode, true, true)
 	return token, nil
 
 }

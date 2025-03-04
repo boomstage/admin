@@ -12,8 +12,8 @@ redis:
   password: ""
 jwt:
   secrets:
-    0: "gosh-secret"
-    1: "gosh_admin-secret"
+    0: "app-secret"
+    1: "google-secret"
 file:
   s3:
     access_key_id: AKIAQE43KARW4PKHRSDZ

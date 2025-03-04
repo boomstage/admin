@@ -11,9 +11,8 @@ const (
 type UserSource int
 
 const (
-	UserSourceApp   UserSource = 0 // 应用
-	UserSourceAdmin UserSource = 1 // 管理后台
-	UserSourceSvc   UserSource = 2 // 内部服务
+	UserSourceApp    UserSource = 0 // 应用
+	UserSourceGoogle UserSource = 1 // Google
 )
 
 type BaseResponse struct {

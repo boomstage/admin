@@ -79,31 +79,7 @@ func NewAuth(secrets map[model.UserSource]string, opts ...AuthOption) app.Handle
 			c.AbortWithStatus(consts.StatusNotFound)
 			return
 		}
-		pathType := paths[2]
 		userSource := model.UserSource(util.ToInt64(c.Query("us")))
-
-		switch pathType {
-		case PathTypeInternal:
-			ip := c.ClientIP()
-			if !util.IsInternalIP(ip) {
-				log.Printf("path: %s is internal path, uid: %s, ip: %s can not access", path, c.GetString("uid"), ip)
-				c.AbortWithStatus(consts.StatusForbidden)
-				return
-			}
-			// 如果是内网, 不需要鉴权, 但需要us为UserSourceSvc
-			if userSource != model.UserSourceSvc {
-				log.Printf("path: %s is internal path, uid: %s, us: %d can not access", path, c.GetString("uid"), int64(userSource))
-				c.AbortWithStatus(consts.StatusForbidden)
-				return
-			}
-			return
-		case PathTypeAdmin:
-			if userSource != model.UserSourceAdmin {
-				log.Printf("path: %s is admin path, uid: %s, us: %d can not access", path, c.GetString("uid"), int64(userSource))
-				c.AbortWithStatus(consts.StatusForbidden)
-				return
-			}
-		}
 
 		// 鉴权
 		tokenString := string(c.GetHeader(AuthKey))
