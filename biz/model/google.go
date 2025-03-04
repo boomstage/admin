@@ -14,5 +14,3 @@ var GoogleOAuthConfig = &oauth2.Config{
 	Scopes:      []string{"email", "profile"},
 	Endpoint:    google.Endpoint,
 }
-
-var JwtSecret = []byte("your_jwt_secret_key") // JWT 秘钥（请放到环境变量中）
