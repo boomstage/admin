@@ -1,0 +1,103 @@
+### 所有请求都带上uid参数,并且header中带上token
+@url = http://localhost:8895
+
+### 1️⃣ 新增音乐
+POST {{url}}/admin/music/create
+Content-Type: application/json
+
+{
+  "uid": 1,
+  "cover_url": "https://example.com/cover.jpg",
+  "song_name": "Example Song",
+  "artist_name": "Example Artist",
+  "isrc": "US1234567890",
+  "music_link": "https://example.com/music.mp3"
+}
+
+### 2️⃣ 获取音乐详情
+GET {{url}}/admin/music/get?id=1
+
+### 响应示例:
+#{
+#    "code": 0,
+#    "data": {
+#        "id": 1,
+#        "uid": 1,
+#        "cover_url": "https://example.com/cover.jpg",
+#        "song_name": "Example Song",
+#        "artist_name": "Example Artist",
+#        "isrc": "US1234567890",
+#        "music_link": "https://example.com/music.mp3",
+#        "created_at": "2024-03-04T12:00:00Z",
+#        "updated_at": "2024-03-04T12:00:00Z"
+#    }
+#}
+
+### 3️⃣ 更新音乐信息
+PUT {{url}}/admin/music/update
+Content-Type: application/json
+
+{
+  "id": 1,
+  "song_name": "Updated Song Name",
+  "artist_name": "Updated Artist",
+  "music_link": "https://example.com/updated_music.mp3"
+}
+
+### 4️⃣ 删除音乐
+DELETE {{url}}/admin/music/delete?id=1
+
+### 5️⃣ 获取音乐列表（分页）
+GET {{url}}/admin/music/list?page=1&size=10
+
+### 响应示例:
+#{
+#    "code": 0,
+#    "data": [{
+#        "id": 1,
+#        "uid": 1,
+#        "cover_url": "https://example.com/cover.jpg",
+#        "song_name": "Example Song",
+#        "artist_name": "Example Artist",
+#        "isrc": "US1234567890",
+#        "music_link": "https://example.com/music.mp3",
+#        "created_at": "2024-03-04T12:00:00Z",
+#        "updated_at": "2024-03-04T12:00:00Z"
+#    }]
+#}
+
+### 6️⃣ 获取音乐标签列表
+GET {{url}}/admin/music/tags?id=1
+
+### 响应示例:
+#{
+#    "code": 0,
+#    "data": [
+#        {
+#            "tag_id": 1,
+#            "tag_name": "Pop"
+#        },
+#        {
+#            "tag_id": 2,
+#            "tag_name": "Rock"
+#        }
+#    ]
+#}
+
+### 7️⃣ 给音乐添加标签
+POST {{url}}/admin/music/add_tag
+Content-Type: application/json
+
+{
+  "music_id": 1,
+  "tag_id": 1
+}
+
+### 8️⃣ 删除音乐标签
+DELETE {{url}}/admin/music/remove_tag
+Content-Type: application/json
+
+{
+  "music_id": 1,
+  "tag_id": 1
+}

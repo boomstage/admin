@@ -1,0 +1,71 @@
+### 所有请求都带上uid参数,并且header中带上token
+@url = http://localhost:8895
+
+### has_copyright_issue 是否有版权问题 yes/no
+### is_vaild 是否合法 yes/no
+
+### 1️⃣ 新增视频
+POST {{url}}/admin/video/create
+Content-Type: application/json
+
+{
+  "channel_id": 1,
+  "video_cover": "https://example.com/video_cover.jpg",
+  "video_title": "Sample Video",
+  "song_name": "Example Song",
+  "has_copyright_issue": "no",
+  "is_vaild": "no",
+  "isrc": "US1234567890"
+}
+
+### 2️⃣ 获取视频详情
+GET {{url}}/admin/video/get?video_id=1
+
+### 响应示例:
+#{
+#    "code": 0,
+#    "data": {
+#        "id": 1,
+#        "channel_id": 1,
+#        "video_cover": "https://example.com/video_cover.jpg",
+#        "video_title": "Sample Video",
+#        "created_at": "2024-03-04T12:00:00Z",
+#        "song_name": "Example Song",
+#        "has_copyright_issue": "no",
+#        "is_matched_to_library": "no",
+#        "isrc": "US1234567890"
+#    }
+#}
+
+### 3️⃣ 更新视频信息
+PUT {{url}}/admin/video/update
+Content-Type: application/json
+
+{
+  "video_id": 1,
+  "video_title": "Updated Video Title",
+  "has_copyright_issue": "yes",
+  "is_matched_to_library": "yes"
+}
+
+### 4️⃣ 删除视频
+DELETE {{url}}/admin/video/delete?video_id=1
+
+### 5️⃣ 获取视频列表（分页）channel_id 频道ID
+GET {{url}}/admin/video/list?page=1&size=10&channel_id=1
+
+### 响应示例:
+#{
+#    "code": 0,
+#    "data": [{
+#        "id": 1,
+#        "channel_id": 1,
+#        "video_cover": "https://example.com/video_cover.jpg",
+#        "video_title": "Sample Video",
+#        "created_at": "2024-03-04T12:00:00Z",
+#        "song_name": "Example Song",
+#        "has_copyright_issue": "no",
+#        "is_matched_to_library": "no",
+#        "isrc": "US1234567890"
+#    }]
+#}

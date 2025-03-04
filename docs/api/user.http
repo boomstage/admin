@@ -1,0 +1,61 @@
+### 所有请求都带上uid参数,并且header中带上token
+### role 系统角色,super_admin(超管), manager(工作室), operator(运营)
+
+### 1️⃣ 创建用户
+@url = http://localhost:8895
+POST {{url}}/admin/user/create
+Content-Type: application/json
+
+{
+  "username": "test_user",
+  "phone": "13812345678",
+  "password": "securepassword",
+  "role": "operator",
+  "rate": 0.05
+}
+
+### 2️⃣ 获取用户信息
+GET {{url}}/admin/user/get?uid=?
+
+### 响应示例:
+#{
+#    "code": 0,
+#    "data": {
+#        "uid": 1,
+#        "username": "test_user",
+#        "phone": "13812345678",
+#        "role": "operator",
+#        "rate": 0.05,
+#        "create_at": 150011,
+#    }
+#}
+
+
+### 3️⃣ 更新用户信息
+PUT {{url}}/admin/user/update
+Content-Type: application/json
+
+{
+  "username": "updated_user",
+  "phone": "13887654321",
+  "rate": 0.1
+}
+
+### 4️⃣ 删除用户
+DELETE {{url}}/admin/user/delete?uid=1
+
+### 5️⃣ 获取用户列表 (分页)
+GET {{url}}/admin/user/list?page=1&size=10
+
+### 响应示例:
+#{
+#    "code": 0,
+#    "data": [{
+#        "uid": 1,
+#        "username": "test_user",
+#        "phone": "13812345678",
+#        "role": "operator",
+#        "rate": 0.05,
+#        "create_at": 150011,
+#    }]
+#}

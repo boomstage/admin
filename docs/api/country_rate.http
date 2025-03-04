@@ -1,0 +1,50 @@
+@url = http://localhost:8895
+
+### 1️⃣ 创建国家费率
+POST {{url}}/admin/country_rate/create
+Content-Type: application/json
+
+{
+  "country": "US",
+  "country_rate": 0.05
+}
+
+### 2️⃣ 获取国家费率
+GET {{url}}/admin/country_rate/get?country=US
+
+### 响应示例:
+#{
+#    "code": 0,
+#    "data": {
+#        "id": 1,
+#        "country_rate": 0.05,
+#        "country": "US",
+#        "updated_at": "2024-03-04T12:00:00Z"
+#    }
+#}
+
+### 3️⃣ 更新国家费率
+PUT {{url}}/admin/country_rate/update
+Content-Type: application/json
+
+{
+  "country": "US",
+  "country_rate": 0.07
+}
+
+### 4️⃣ 删除国家费率
+DELETE {{url}}/admin/country_rate/delete?country=US
+
+### 5️⃣ 获取国家费率列表（分页）
+GET {{url}}/admin/country_rate/list?page=1&size=10
+
+### 响应示例:
+#{
+#    "code": 0,
+#    "data": [{
+#        "id": 1,
+#        "country_rate": 0.05,
+#        "country": "US",
+#        "updated_at": "2024-03-04T12:00:00Z"
+#    }]
+#}

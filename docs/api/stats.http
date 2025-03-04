@@ -1,0 +1,74 @@
+@url = http://localhost:8895
+
+### 1️⃣ 获取视频统计数据
+GET {{url}}/admin/video_stats/get?video_id=1&start=2024-03-04&end=2024-03-05
+
+### 响应示例:
+#{
+#    "code": 0,
+#    "data": {
+#        "id": 1,
+#        "video_id": 1,
+#        "total_views": 10000,
+#        "premium_views": 2000,
+#        "likes": 500,
+#        "comments": 100,
+#        "estimated_revenue": 120.50,
+#        "country": "US",
+#        "stat_date": "2024-03-04"
+#    }
+#}
+
+### 2️⃣ 获取视频统计数据列表（分页）
+GET {{url}}/admin/video_stats/list?page=1&size=10
+
+### 响应示例:
+#{
+#    "code": 0,
+#    "data": [{
+#        "id": 1,
+#        "video_id": 1,
+#        "total_views": 10000,
+#        "premium_views": 2000,
+#        "likes": 500,
+#        "comments": 100,
+#        "estimated_revenue": 120.50,
+#        "country": "US",
+#        "stat_date": "2024-03-04"
+#    }]
+#}
+
+
+### 1️⃣ 获取频道统计数据
+GET {{url}}/admin/channel_stats/get?channel_id=1&stat_date=2024-03-04
+
+### 响应示例:
+#{
+#    "code": 0,
+#    "data": {
+#        "id": 1,
+#        "channel_id": 1,
+#        "total_views": 100000,
+#        "premium_views": 50000,
+#        "estimated_revenue": 1500.00,
+#        "country": "US",
+#        "stat_date": "2024-03-04"
+#    }
+#}
+
+### 2️⃣ 获取频道统计数据列表（分页）
+GET {{url}}/admin/channel_stats/list?page=1&size=10&start=2024-03-04&end=2024-03-05
+
+### 响应示例:
+#{
+#    "code": 0,
+#    "data": [{
+#        "id": 1,
+#        "channel_id": 1,
+#        "total_views": 100000,
+#        "premium_views": 50000,
+#        "estimated_revenue": 1500.00,
+#        "country": "US",
+#        "stat_date": "2024-03-04"
+#    }]
+#}
