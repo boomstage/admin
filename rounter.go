@@ -18,4 +18,8 @@ func customizedAdminRegister(r *server.Hertz) {
 	user.POST("/create", handler.User.Create)
 	user.POST("/login", handler.User.Login)
 
+	// test
+	test := app.Group("/test")
+	test.GET("login", handler.Test.Login)
+
 }
