@@ -1,5 +1,5 @@
-@url = http://127.0.0.1:8895
-#@url = http://boombition.com/
+#@url = http://127.0.0.1:8895
+@url = http://boombition.com/
 ### 1️⃣ test login
 GET {{url}}/app/test/login?uid=7
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjcsInVzZXJfc291cmNlIjowLCJleHAiOjE3NDEyMzMzMDF9.Hu_S8lSgxhD7VHi1coSp31GrBxFeb5lgulQGpYaOFUs
