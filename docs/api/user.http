@@ -1,7 +1,7 @@
 ### 所有请求都带上uid参数,并且header中带上 Authorization:token
 ### role 系统角色,super_admin(超管), manager(工作室), operator(运营)
 
-
+@url = http://127.0.0.1:8895
 ### 1️⃣ 用户登录
 POST {{url}}/app/user/login
 Content-Type: application/json
@@ -11,9 +11,17 @@ Content-Type: application/json
   "password": "securepassword"
 }
 
+### 响应
+#{
+#  "code": 0,
+#  "data": {
+#    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjcsInVzZXJfc291cmNlIjowLCJleHAiOjE3NDEyMzI5Mjd9.rD0gNMetk2n-FfKvoSsPpCTNyJfURhWijSLXxFp-Ipw"
+#  },
+#  "server_time": 1741146527
+#}
+
 
 ### 1️⃣ 创建用户
-@url = http://localhost:8895
 POST {{url}}/app/user/create
 Content-Type: application/json
 

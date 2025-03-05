@@ -1,7 +1,8 @@
-@url = http://localhost:8895
+@url = http://127.0.0.1:8895
 
 ### 1️⃣ 获取视频统计数据
-GET {{url}}/app/video_stats/get?video_id=1&start=2024-03-04&end=2024-03-05
+GET {{url}}/app/video_stats/get?video_id=1&start=2024-03-04&end=2024-03-05&uid=7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjcsInVzZXJfc291cmNlIjowLCJleHAiOjE3NDEyMzI5Mjd9.rD0gNMetk2n-FfKvoSsPpCTNyJfURhWijSLXxFp-Ipw
 
 ### 响应示例:
 #{
