@@ -1,8 +1,8 @@
-### 所有请求都带上uid参数,并且header中带上token
+### 所有请求都带上uid参数,并且header中带上 Authorization:token
 @url = http://localhost:8895
 
 ### 1️⃣ 新增音乐
-POST {{url}}/admin/music/create
+POST {{url}}/app/music/create
 Content-Type: application/json
 
 {
@@ -15,7 +15,7 @@ Content-Type: application/json
 }
 
 ### 2️⃣ 获取音乐详情
-GET {{url}}/admin/music/get?id=1
+GET {{url}}/app/music/get?id=1
 
 ### 响应示例:
 #{
@@ -34,7 +34,7 @@ GET {{url}}/admin/music/get?id=1
 #}
 
 ### 3️⃣ 更新音乐信息
-PUT {{url}}/admin/music/update
+PUT {{url}}/app/music/update
 Content-Type: application/json
 
 {
@@ -45,10 +45,10 @@ Content-Type: application/json
 }
 
 ### 4️⃣ 删除音乐
-DELETE {{url}}/admin/music/delete?id=1
+DELETE {{url}}/app/music/delete?id=1
 
 ### 5️⃣ 获取音乐列表（分页）
-GET {{url}}/admin/music/list?page=1&size=10
+GET {{url}}/app/music/list?page=1&size=10
 
 ### 响应示例:
 #{
@@ -67,7 +67,7 @@ GET {{url}}/admin/music/list?page=1&size=10
 #}
 
 ### 6️⃣ 获取音乐标签列表
-GET {{url}}/admin/music/tags?id=1
+GET {{url}}/app/music/tags?id=1
 
 ### 响应示例:
 #{
@@ -85,7 +85,7 @@ GET {{url}}/admin/music/tags?id=1
 #}
 
 ### 7️⃣ 给音乐添加标签
-POST {{url}}/admin/music/add_tag
+POST {{url}}/app/music/add_tag
 Content-Type: application/json
 
 {
@@ -94,7 +94,7 @@ Content-Type: application/json
 }
 
 ### 8️⃣ 删除音乐标签
-DELETE {{url}}/admin/music/remove_tag
+DELETE {{url}}/app/music/remove_tag
 Content-Type: application/json
 
 {

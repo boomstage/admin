@@ -1,8 +1,12 @@
 package util
 
 import (
+	"crypto/md5"
+	"encoding/hex"
+	"math/rand"
 	"reflect"
 	"strconv"
+	"time"
 )
 
 func ToInt64(i interface{}) int64 {
@@ -25,4 +29,24 @@ func ToInt64(i interface{}) int64 {
 	default:
 		return 0
 	}
+}
+
+// EncryptPassword 使用 MD5 + Salt 进行密码加密
+func EncryptPassword(password, salt string) string {
+	hash := md5.New()
+	hash.Write([]byte(password + salt)) // 组合密码和 salt
+	return hex.EncodeToString(hash.Sum(nil))
+}
+
+// 随机字符集
+const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+
+// GenerateSalt 生成指定长度的随机 salt
+func GenerateSalt(length int) string {
+	rand.Seed(time.Now().UnixNano())
+	salt := make([]byte, length)
+	for i := range salt {
+		salt[i] = charset[rand.Intn(len(charset))]
+	}
+	return string(salt)
 }

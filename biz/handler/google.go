@@ -5,14 +5,11 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"github.com/boomstage/admin/biz/model"
-	"github.com/boomstage/admin/biz/mw"
-	"github.com/boomstage/admin/biz/service"
 	"github.com/boomstage/admin/biz/util"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol"
 	"github.com/duke-git/lancet/v2/convertor"
 	"math/rand"
-	"time"
 )
 
 var Google GoogleHandler
@@ -65,20 +62,6 @@ func (g *GoogleHandler) HandleGoogleCallback(ctx context.Context, c *app.Request
 		Name  string `json:"name"`
 	}
 	json.NewDecoder(resp.Body).Decode(&userInfo)
-
-	user := service.InitUser()
-	id, err := user.CreateOrGetID(&model.User{
-		Email: userInfo.Email,
-	})
-	authToken, err := mw.GenAuthTokenAndSetCookie(c, model.UserSourceGoogle, id, 24*time.Hour)
-	if err != nil {
-		util.Zerolog.Err(err).Msg("Failed to generate auth token")
-		return
-	}
-	type Response struct {
-		Token string `json:"token"`
-	}
-	r := &Response{Token: authToken}
-	util.FmtDataResp(c, r)
+	util.FmtDataResp(c, userInfo)
 	return
 }

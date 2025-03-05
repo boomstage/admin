@@ -10,6 +10,8 @@ func InitAuth(h *server.Hertz) {
 		"/app/google/login",
 		"/app/google/callback",
 		"/ping",
+		"/app/user/create",
+		"/app/user/login",
 	}
 
 	h.Use(NewAuth(dao.Conf.JWT.Secrets, WithExcluedPaths(excluedePaths)))

@@ -22,6 +22,14 @@ func FmtDataResp(c *app.RequestContext, data interface{}) {
 	})
 }
 
+func FmtErrResp(c *app.RequestContext, code int, msg string) {
+	c.JSON(consts.StatusOK, &model.BaseResponse{
+		Code:       model.CodeOK,
+		Message:    msg,
+		ServerTime: time.Now().Unix(),
+	})
+}
+
 func fmtDataResp(c *app.RequestContext, data interface{}) {
 	c.JSON(consts.StatusOK, &model.BaseResponse{
 		Code:       model.CodeOK,

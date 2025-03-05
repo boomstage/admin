@@ -13,4 +13,9 @@ func customizedAdminRegister(r *server.Hertz) {
 
 	app.GET("/google/login", handler.Google.HandleGoogleLogin)
 	app.GET("/google/callback", handler.Google.HandleGoogleCallback)
+
+	user := app.Group("/user")
+	user.POST("/create", handler.User.Create)
+	user.POST("/login", handler.User.Login)
+
 }

@@ -2,23 +2,16 @@ package dao
 
 import (
 	"fmt"
-	"strings"
-	"time"
-
 	"github.com/boomstage/admin/biz/model"
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/jmoiron/sqlx"
-	"github.com/jmoiron/sqlx/reflectx"
 	"github.com/redis/go-redis/v9"
 	"github.com/spf13/viper"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
 var (
-	DBM           *sqlx.DB
-	DBS           *sqlx.DB
-	DBAdm         *sqlx.DB
-	DataCenterDBM *sqlx.DB
-	DataCenterDBS *sqlx.DB
+	DBM *gorm.DB
+	DBS *gorm.DB
 
 	// RedisClt *redis.Client
 	RedisClt *redis.ClusterClient
@@ -38,7 +31,7 @@ func Init() {
 
 }
 
-func GetDB(options *Options) *sqlx.DB {
+func GetDB(options *Options) *gorm.DB {
 	if options.FromMaster {
 		return DBM
 	}
@@ -55,13 +48,9 @@ func InitConf() {
 }
 
 func initMySQLClients() {
-	DBM = sqlx.MustConnect("mysql", Conf.MySQL.Base.MasterDSN)
-	setDBClient(DBM)
-}
-
-func setDBClient(cl *sqlx.DB) {
-	cl.Mapper = reflectx.NewMapperFunc("json", strings.ToLower)
-	cl.SetMaxOpenConns(128)
-	cl.SetMaxIdleConns(128)
-	cl.SetConnMaxLifetime(20 * time.Minute)
+	var err error
+	DBM, err = gorm.Open(mysql.Open(Conf.MySQL.Base.MasterDSN), &gorm.Config{})
+	if err != nil {
+		panic(err)
+	}
 }

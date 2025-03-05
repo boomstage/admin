@@ -1,7 +1,7 @@
 @url = http://localhost:8895
 
 ### 1️⃣ 获取视频统计数据
-GET {{url}}/admin/video_stats/get?video_id=1&start=2024-03-04&end=2024-03-05
+GET {{url}}/app/video_stats/get?video_id=1&start=2024-03-04&end=2024-03-05
 
 ### 响应示例:
 #{
@@ -20,7 +20,7 @@ GET {{url}}/admin/video_stats/get?video_id=1&start=2024-03-04&end=2024-03-05
 #}
 
 ### 2️⃣ 获取视频统计数据列表（分页）
-GET {{url}}/admin/video_stats/list?page=1&size=10
+GET {{url}}/app/video_stats/list?page=1&size=10
 
 ### 响应示例:
 #{
@@ -40,7 +40,7 @@ GET {{url}}/admin/video_stats/list?page=1&size=10
 
 
 ### 1️⃣ 获取频道统计数据
-GET {{url}}/admin/channel_stats/get?channel_id=1&stat_date=2024-03-04
+GET {{url}}/app/channel_stats/get?channel_id=1&stat_date=2024-03-04
 
 ### 响应示例:
 #{
@@ -57,7 +57,7 @@ GET {{url}}/admin/channel_stats/get?channel_id=1&stat_date=2024-03-04
 #}
 
 ### 2️⃣ 获取频道统计数据列表（分页）
-GET {{url}}/admin/channel_stats/list?page=1&size=10&start=2024-03-04&end=2024-03-05
+GET {{url}}/app/channel_stats/list?page=1&size=10&start=2024-03-04&end=2024-03-05
 
 ### 响应示例:
 #{
